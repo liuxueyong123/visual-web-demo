@@ -39,22 +39,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
+/* eslint-disable no-shadow */
 import { Component, Vue } from 'vue-property-decorator';
 import draggable from 'vuedraggable';
-import { schema as schema1 } from '@/components/Component1.vue';
-import { schema as schema2 } from '@/components/Component2.vue';
-import { schema as schema3 } from '@/components/Component3.vue';
-
-export interface CompoentSchema {
-  component: typeof Vue;
-  name: string;
-  key: string;
-  data: Record<string, any>;
-}
+import { ComponentList, ComponentSchema } from '@/model';
+import Component1, { schema as schema1 } from '@/components/Component1.vue';
+import Component2, { schema as schema2 } from '@/components/Component2.vue';
+import Component3, { schema as schema3 } from '@/components/Component3.vue';
 
 @Component({
   components: {
     draggable,
+    Component1,
+    Component2,
+    Component3,
   },
 })
 export default class Home extends Vue {
@@ -62,20 +60,19 @@ export default class Home extends Vue {
 
   selectedComponent = schema1
 
-  componentSelectList: CompoentSchema[] = [
+  componentSelectList: ComponentSchema[] = [
     schema1,
     schema2,
     schema3,
   ]
 
-  schema: CompoentSchema[] = []
+  schema: ComponentSchema[] = []
 
   addComponent() {
-    const _selectedComponent: CompoentSchema = {
+    const _selectedComponent: ComponentSchema = {
       ...JSON.parse(JSON.stringify(this.selectedComponent)),
-      component: this.selectedComponent.component,
+      key: `${this.selectedComponent.name}-${Date.now()}`,
     };
-    _selectedComponent.key = `${_selectedComponent.name}-${Date.now()}`;
     this.schema.push(_selectedComponent);
   }
 }

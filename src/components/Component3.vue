@@ -21,7 +21,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
-import { CompoentSchema } from '@/views/Home.vue';
+import { ComponentList, ComponentSchema } from '@/model';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 interface ComponentProps {
@@ -46,8 +46,8 @@ export default class Component3 extends Vue {
   }
 }
 
-export const schema: CompoentSchema = {
-  component: Component3,
+export const schema: ComponentSchema = {
+  component: ComponentList.component3,
   key: '组件三',
   name: '组件三',
   data: {
