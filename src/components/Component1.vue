@@ -21,7 +21,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
-import { ComponentList, ComponentSchema } from '@/model';
+import { ComponentList, ComponentSchema, DOMEvent } from '@/model';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 interface ComponentProps {
@@ -41,7 +41,7 @@ export default class Component1 extends Vue {
 
   contenteditable = true;
 
-  handleElementBlur(attr: keyof ComponentProps, event: any) {
+  handleElementBlur(attr: keyof ComponentProps, event: DOMEvent<HTMLElement>) {
     this.componentData[attr] = event.target.innerHTML;
   }
 }

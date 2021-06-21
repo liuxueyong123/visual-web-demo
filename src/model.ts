@@ -10,5 +10,9 @@ export interface ComponentSchema {
   component: ComponentList;
   name: string;
   key: string;
-  data: Record<string, any>;
+  data: Record<string, string | Array<any>>;
+}
+
+export interface DOMEvent<T extends EventTarget> extends Event {
+  readonly target: T
 }
