@@ -1,13 +1,16 @@
 <template>
   <div class="component">
-    <div
-      class="title"
-      ref="title"
-      :contenteditable="contenteditable"
-      @focus="handleElementFocuse('title')"
-      @blur="(e) => handleElementBlur('title', e)"
-      v-html="componentData.title"
-    ></div>
+    <div class="outside">
+      <div @click="addLink('title')">add Link</div>
+      <div
+        class="title"
+        ref="title"
+        :contenteditable="contenteditable"
+        @focus="handleElementFocuse('title')"
+        @blur="(e) => handleElementBlur('title', e)"
+        v-html="componentData.title"
+      ></div>
+    </div>
     <p
       class="desc"
       ref="desc"
@@ -36,7 +39,7 @@ interface ComponentProps {
 }
 
 const defaultProps: ComponentProps = {
-  title: '游戏语音',
+  title: '游戏语音 <a href="https://www.baidu.com" target="_blank">123</a>',
   desc: '全球首个支持 Unity 和 Cocos 游戏引擎的实时音视频 SDK，与主流游戏引擎深度兼容。适用于狼人杀、棋牌游戏、枪战游戏、以及 MMORPG 游戏中的团战、小队、指挥等游戏开黑场景。',
 };
 
@@ -57,14 +60,19 @@ export default class Component1 extends Vue {
     if (!this.contenteditable) return;
 
     const element = this.$refs[attr] as Element;
+    if (!element || element.childElementCount > 0) return;
     selectElementText(element);
+  }
+
+  addLink(attr: keyof ComponentProps) {
+    this.componentData[attr] = `${this.componentData[attr]}<a href="https://www.baidu.com">hhh</a>`;
   }
 }
 
 export const schema: ComponentSchema = {
   component: ComponentList.component1,
   key: 'component1',
-  name: '组件一',
+  name: '文案型组件',
   data: {
     ...defaultProps,
   },
