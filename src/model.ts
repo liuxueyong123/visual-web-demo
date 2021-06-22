@@ -7,10 +7,10 @@ export enum ComponentList {
 }
 
 export interface ComponentSchema {
-  component: ComponentList;
-  name: string;
-  key: string;
-  data: Record<string, string | Array<any>>;
+  component: ComponentList; // 组件名
+  name: string; // 自定义的组件名称
+  key: string; // key值
+  data: Record<string, string | Array<any>>; // 组件数据
 }
 
 export interface DOMEvent<T extends EventTarget> extends Event {

@@ -3,7 +3,10 @@
     <div class="sidebar">
       <draggable v-model="schema" @start="drag=true" @end="drag=false">
         <transition-group type="transition" :name="'flip-list'">
-          <div v-for="item in schema" :key="item.key" class="item">{{item.name}}</div>
+          <div v-for="item in schema" :key="item.key" class="item">
+            {{item.name}}
+            <img class="delete-icon" src="@/assets/delete.png" @click="removeComponent(item.key)" />
+          </div>
         </transition-group>
       </draggable>
 
@@ -40,9 +43,11 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 /* eslint-disable no-shadow */
+/* eslint-disable no-console */
+/* eslint-disable no-restricted-syntax */
 import { Component, Vue } from 'vue-property-decorator';
 import draggable from 'vuedraggable';
-import { ComponentList, ComponentSchema } from '@/model';
+import { ComponentSchema } from '@/model';
 import Component1, { schema as schema1 } from '@/components/Component1.vue';
 import Component2, { schema as schema2 } from '@/components/Component2.vue';
 import Component3, { schema as schema3 } from '@/components/Component3.vue';
@@ -75,6 +80,15 @@ export default class Home extends Vue {
     };
     this.schema.push(_selectedComponent);
   }
+
+  removeComponent(key: string) {
+    for (const [index, item] of this.schema.entries()) {
+      if (item.key === key) {
+        this.schema.splice(index, 1);
+        break;
+      }
+    }
+  }
 }
 </script>
 
@@ -104,6 +118,17 @@ export default class Home extends Vue {
       line-height: 30px;
       background: rgb(108, 105, 105, 0.05);
       cursor: move;
+      position: relative;
+
+      .delete-icon {
+        position: absolute;
+        right: 10px;
+        top: 8px;
+        display: block;
+        width: 14px;
+        height: 14px;
+        cursor: pointer;
+      }
     }
 
     .component-select {
