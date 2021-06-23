@@ -47,7 +47,7 @@
 /* eslint-disable no-restricted-syntax */
 import { Component, Vue } from 'vue-property-decorator';
 import draggable from 'vuedraggable';
-import { ComponentSchema } from '@/model';
+import { ComponentSchema, ComponentSchemaWithKey } from '@/model';
 import Component1, { schema as schema1 } from '@/components/Component1.vue';
 import Component2, { schema as schema2 } from '@/components/Component2.vue';
 import Component3, { schema as schema3 } from '@/components/Component3.vue';
@@ -71,10 +71,10 @@ export default class Home extends Vue {
     schema3,
   ]
 
-  schema: ComponentSchema[] = []
+  schema: ComponentSchemaWithKey[] = []
 
   addComponent() {
-    const _selectedComponent: ComponentSchema = {
+    const _selectedComponent: ComponentSchemaWithKey = {
       ...JSON.parse(JSON.stringify(this.selectedComponent)),
       key: `${this.selectedComponent.name}-${Date.now()}`,
     };

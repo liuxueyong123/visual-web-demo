@@ -71,7 +71,6 @@ export default class Component1 extends Vue {
 
 export const schema: ComponentSchema = {
   component: ComponentList.component1,
-  key: 'component1',
   name: '文案型组件',
   data: {
     ...defaultProps,

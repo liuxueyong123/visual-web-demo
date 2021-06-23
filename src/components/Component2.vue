@@ -1,13 +1,8 @@
 <template>
   <div class="component">
     <div class="tab-wrapper">
-      <draggable
-        v-model="componentData.tabList"
-        @start="drag=true"
-        @end="drag=false"
-        :disabled="!contenteditable"
-      >
-        <transition-group type="transition" :name="'flip-list'" class="tab-content-wrapper">
+      <draggable v-model="componentData.tabList" :animation="150" handle=".move">
+        <transition-group class="tab-content-wrapper">
           <div
             class="tab-item"
             v-for="(item, index) in componentData.tabList"
@@ -128,8 +123,6 @@ export default class Component2 extends Vue {
 
   contenteditable = true;
 
-  drag = true
-
   selectedTabKey = this.componentData.tabList[0].key
 
   handleTabListBlur(index: number, attr: keyof TabItem, event: DOMEvent<HTMLElement>) {
@@ -176,7 +169,6 @@ export default class Component2 extends Vue {
 
 export const schema: ComponentSchema = {
   component: ComponentList.component2,
-  key: '组件二',
   name: 'tab组件',
   data: {
     ...defaultProps,

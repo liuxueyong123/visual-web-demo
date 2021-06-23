@@ -48,7 +48,6 @@ export default class Component3 extends Vue {
 
 export const schema: ComponentSchema = {
   component: ComponentList.component3,
-  key: '组件三',
   name: '组件三',
   data: {
     ...defaultProps,
