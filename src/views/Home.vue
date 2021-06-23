@@ -1,8 +1,8 @@
 <template>
   <div class="page">
     <div class="sidebar">
-      <draggable v-model="schema" @start="drag=true" @end="drag=false">
-        <transition-group type="transition" :name="'flip-list'">
+      <draggable v-model="schema" :animation="150">
+        <transition-group>
           <div v-for="item in schema" :key="item.key" class="item">
             {{item.name}}
             <img class="delete-icon" src="@/assets/delete.png" @click="removeComponent(item.key)" />
@@ -61,8 +61,6 @@ import Component3, { schema as schema3 } from '@/components/Component3.vue';
   },
 })
 export default class Home extends Vue {
-  drag = true
-
   selectedComponent = schema1
 
   componentSelectList: ComponentSchema[] = [
